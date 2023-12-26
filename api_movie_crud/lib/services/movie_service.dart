@@ -43,4 +43,18 @@ class BookService {
       throw "Error";
     }
   }
+
+  Future<List<Book>> editBookApi(
+      String title, String price, String description, int id) async {
+    List<Book> books = [];
+    try {
+      final response = await _dio.put(_serverUrl + "/$id",
+          data: {"title": title, "price": price, "description": description});
+      books =
+          (response.data as List).map((book) => Book.fromJson(book)).toList();
+      return books;
+    } catch (e) {
+      throw "Error";
+    }
+  }
 }

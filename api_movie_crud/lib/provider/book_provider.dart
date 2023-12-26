@@ -24,4 +24,10 @@ class BookProvider extends ChangeNotifier {
     getBookList();
     notifyListeners();
   }
+
+  Future<void> editBook(String title, String price, description, int id) async {
+    booksList = await _bookService.editBookApi(title, price, description, id);
+    getBookList();
+    notifyListeners();
+  }
 }

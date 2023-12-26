@@ -33,7 +33,72 @@ class MyHomePage extends StatelessWidget {
                   builder: (context, value, child) => ListView.builder(
                       itemCount: value.booksList.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
+                        return Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Left side - Image
+                                Container(
+                                  margin: EdgeInsets.only(right: 16.0),
+                                  child: Image.network(
+                                    'https://example.com/your_image_url.jpg',
+                                    width: 80.0,
+                                    height: 80.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                // Middle - Title and Description
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        value.booksList[index].title.toString(),
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 8.0),
+                                      Text(
+                                        value.booksList[index].description
+                                            .toString(),
+                                        style: TextStyle(fontSize: 14.0),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      child: Text(
+                                          "${value.booksList[index].price} KD"),
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.delete),
+                                      onPressed: () {
+                                        context.read<BookProvider>().deleteBook(
+                                            value.booksList[index].id
+                                                .toString());
+                                      },
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.edit),
+                                      onPressed: () {},
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+
+                        /*ListTile(
                           title: Text(value.booksList[index].title.toString()),
                           trailing: IconButton(
                               onPressed: () {
@@ -41,7 +106,7 @@ class MyHomePage extends StatelessWidget {
                                     value.booksList[index].id.toString());
                               },
                               icon: Icon(Icons.delete)),
-                        );
+                        );*/
                       }));
             }));
   }
