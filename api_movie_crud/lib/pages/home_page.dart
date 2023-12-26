@@ -40,17 +40,15 @@ class MyHomePage extends StatelessWidget {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Left side - Image
                                 Container(
                                   margin: EdgeInsets.only(right: 16.0),
                                   child: Image.network(
-                                    'https://example.com/your_image_url.jpg',
-                                    width: 80.0,
-                                    height: 80.0,
+                                    'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/61aG6EicTIL.jpg',
+                                    width: 100.0,
+                                    height: 120.0,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                // Middle - Title and Description
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment:

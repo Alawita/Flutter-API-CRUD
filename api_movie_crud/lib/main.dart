@@ -28,7 +28,8 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/edit',
       builder: (BuildContext context, GoRouterState state) {
-        return EditBookPage(id: 1);
+        // Access the 'id' parameter from the state directly
+        return EditBookPage(id: state.extra as int);
       },
     ),
   ],
