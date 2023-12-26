@@ -1,4 +1,5 @@
 import 'package:api_movie_crud/pages/add_book.dart';
+import 'package:api_movie_crud/pages/edit_book.dart';
 import 'package:api_movie_crud/pages/home_page.dart';
 import 'package:api_movie_crud/provider/book_provider.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,12 @@ final GoRouter _router = GoRouter(
       path: '/add',
       builder: (BuildContext context, GoRouterState state) {
         return AddBookPage();
+      },
+    ),
+    GoRoute(
+      path: '/edit',
+      builder: (BuildContext context, GoRouterState state) {
+        return EditBookPage(id: 1);
       },
     ),
   ],

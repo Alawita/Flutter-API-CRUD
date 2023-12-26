@@ -1,3 +1,4 @@
+import 'package:api_movie_crud/models/movie_model.dart';
 import 'package:api_movie_crud/provider/book_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,10 @@ class MyHomePage extends StatelessWidget {
                                     ),
                                     IconButton(
                                       icon: Icon(Icons.edit),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        GoRouter.of(context).push("/edit",
+                                            extra: value.booksList[index].id);
+                                      },
                                     ),
                                   ],
                                 ),
