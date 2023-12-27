@@ -1,5 +1,5 @@
-import 'package:api_movie_crud/models/movie_model.dart';
-import 'package:api_movie_crud/services/movie_service.dart';
+import 'package:api_movie_crud/models/book_model.dart';
+import 'package:api_movie_crud/services/book_service.dart';
 import 'package:flutter/cupertino.dart';
 
 class BookProvider extends ChangeNotifier {

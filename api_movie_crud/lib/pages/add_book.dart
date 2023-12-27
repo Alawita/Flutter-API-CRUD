@@ -25,28 +25,78 @@ class _AddBookPageState extends State<AddBookPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            TextField(
+            buildTextFormFieldWithLabel(
               controller: _titleController,
-              decoration: new InputDecoration.collapsed(hintText: 'book title'),
+              labelText: 'Book Title',
             ),
-            TextField(
+            buildTextFormFieldWithLabel(
               controller: _priceController,
-              decoration: new InputDecoration.collapsed(hintText: 'price'),
+              labelText: 'Price',
+              keyboardType: TextInputType.number,
             ),
-            TextField(
+            buildTextFormFieldWithLabel(
               controller: _discController,
-              decoration:
-                  new InputDecoration.collapsed(hintText: 'description'),
+              labelText: 'Description',
             ),
             ElevatedButton(
-                onPressed: () {
-                  context.read<BookProvider>().addBook(_titleController.text,
-                      _priceController.text, _discController.text);
-                  GoRouter.of(context).pop();
-                },
-                child: Text("add a book"))
+              onPressed: () {
+                setState(() {
+                  context.read<BookProvider>().addBook(
+                        _titleController.text,
+                        _priceController.text,
+                        _discController.text,
+                      );
+                });
+
+                GoRouter.of(context).pop();
+              },
+              child: Text("Add a Book"),
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildTextFormFieldWithLabel({
+    required TextEditingController controller,
+    required String labelText,
+    TextInputType? keyboardType,
+  }) {
+    return Container(
+      padding: EdgeInsets.all(8.0),
+      child: Stack(
+        alignment: Alignment.topLeft,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: TextFormField(
+              controller: controller,
+              decoration: InputDecoration(
+                labelText: '',
+                border: InputBorder.none,
+              ),
+              keyboardType: keyboardType,
+            ),
+          ),
+          Positioned(
+            left: 10.0,
+            top: 8.0,
+            child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 4.0),
+              child: Text(
+                labelText,
+                style: TextStyle(
+                  backgroundColor: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

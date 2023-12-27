@@ -1,13 +1,18 @@
-import 'package:api_movie_crud/models/movie_model.dart';
+import 'package:api_movie_crud/models/book_model.dart';
 import 'package:api_movie_crud/provider/book_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,16 +29,13 @@ class MyHomePage extends StatelessWidget {
         ),
         body: FutureBuilder(
             future: context.read<BookProvider>().getBookList(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: LinearProgressIndicator(),
-                );
-              }
+            builder: (context, snapshot) {
               return Consumer<BookProvider>(
                   builder: (context, value, child) => ListView.builder(
                       itemCount: value.booksList.length,
                       itemBuilder: (context, index) {
+                        context.read<BookProvider>().getBookList();
+
                         return Card(
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -81,9 +83,13 @@ class MyHomePage extends StatelessWidget {
                                     IconButton(
                                       icon: Icon(Icons.delete),
                                       onPressed: () {
-                                        context.read<BookProvider>().deleteBook(
-                                            value.booksList[index].id
-                                                .toString());
+                                        setState(() {
+                                          context
+                                              .read<BookProvider>()
+                                              .deleteBook(value
+                                                  .booksList[index].id
+                                                  .toString());
+                                        });
                                       },
                                     ),
                                     IconButton(

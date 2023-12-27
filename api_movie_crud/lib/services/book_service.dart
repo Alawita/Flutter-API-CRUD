@@ -1,4 +1,4 @@
-import 'package:api_movie_crud/models/movie_model.dart';
+import 'package:api_movie_crud/models/book_model.dart';
 import 'package:dio/dio.dart';
 
 class BookService {
